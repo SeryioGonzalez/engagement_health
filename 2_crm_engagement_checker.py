@@ -137,4 +137,4 @@ message = {'message_subject': message_subject, 'message_body': message_body, 'me
 
 #SENT IT
 helper_core.log(start_time_seconds, "INFO", "Sending notification")
-#helper_api.post_to_api(teams_notification_endpoint, message)
+helper_api.post_to_api(teams_notification_endpoint, message)
