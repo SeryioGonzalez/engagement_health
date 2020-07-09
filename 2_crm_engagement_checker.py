@@ -120,7 +120,7 @@ with open(engagement_check_results_file) as fp:
         
         engagement_owner_emails = helper_core.get_owner_emails(engagement_owner_names)
 
-       # [message_to.append(email) for email in engagement_owner_emails]
+        [message_to.append(email) for email in engagement_owner_emails]
         
     else:
         helper_core.log(start_time_seconds, "INFO", "No items to correct")
