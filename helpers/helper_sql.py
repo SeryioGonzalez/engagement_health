@@ -52,10 +52,11 @@ def execute_query_file(database_connection, sql_query_file):
 
     with open(sql_query_file) as sql_file:
         sql_as_string_list = sql_file.read().split(';')
-        sql_as_string_list.pop()
+        if len(sql_as_string_list) > 1:
+            sql_as_string_list.pop()
 
         database_cursor = database_connection.cursor()
-
+        
         for sql_as_string in sql_as_string_list:
             database_cursor.execute(sql_as_string + ";")
             query_result = database_cursor.fetchall()
