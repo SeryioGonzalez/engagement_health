@@ -68,7 +68,7 @@ def execute_query_file(database_connection, sql_query_file):
 
 def get_database_connection():
     #GET DATABASE CONNECTION DATA
-    sql_database_server = helper_config.get_config_item("SQL", "DATABASE_SERVER")
+    sql_database_server = helper_config.get_config_item("SQL", "DATABASE_SERVER_FQDN")
     sql_database_name   = helper_config.get_config_item("SQL", "DATABASE_NAME")
     sql_database_user   = helper_config.get_config_item("SQL", "DATABASE_USER")
     sql_database_pass   = helper_config.get_config_item("SQL", "DATABASE_PASS")
