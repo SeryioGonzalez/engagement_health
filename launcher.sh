@@ -1,6 +1,6 @@
 #!/bin/bash
 
-installation_dir="/home/sergio/python/crm-engagement-checker/"
+installation_dir="/home/sergio/engagement_health/"
 set -e
 
 send_report=$1
@@ -13,23 +13,23 @@ function read_config {
 }
 
 
-echo "MANAGING FIREWALL RULES"
-resource_group_name=$(read_config "AZURE" "RESOURCE_GROUP")
-subscription=$(read_config "AZURE" "SUBSCRIPTION")
-database_server_name=$(read_config "SQL" "DATABASE_SERVER")
+#echo "MANAGING FIREWALL RULES"
+#resource_group_name=$(read_config "AZURE" "RESOURCE_GROUP")
+#subscription=$(read_config "AZURE" "SUBSCRIPTION")
+#database_server_name=$(read_config "SQL" "DATABASE_SERVER")
 
-az account set --subscription $subscription
+#az account set --subscription $subscription
 
-echo "DELETE OLD RULE"
-existing_rule_name=$(az mysql server firewall-rule list --resource-group $resource_group_name --server-name $database_server_name  --query "[?contains(name,'ClientIPAddress_')].name" -o tsv)
-if [ "fff$existing_rule_name" != "fff" ]
-then
-    az mysql server firewall-rule delete --name $existing_rule_name --resource-group $resource_group_name --server-name $database_server_name --yes
-fi
+#echo "DELETE OLD RULE"
+#existing_rule_name=$(az mysql server firewall-rule list --resource-group $resource_group_name --server-name $database_server_name  --query "[?contains(name,'ClientIPAddress_')].name" -o tsv)
+#if [ "fff$existing_rule_name" != "fff" ]
+#then
+#    az mysql server firewall-rule delete --name $existing_rule_name --resource-group $resource_group_name --server-name $database_server_name --yes
+#fi
 
-echo "CREATE FIREWALL RULE"
-my_public_ip=$(dig +short myip.opendns.com @resolver1.opendns.com)
-az mysql server firewall-rule create --name "ClientIPAddress_"$(date +%Y%m%d) --resource-group $resource_group_name --server-name $database_server_name --start-ip-address $my_public_ip --end-ip-address $my_public_ip > /dev/null
+#echo "CREATE FIREWALL RULE"
+#my_public_ip=$(dig +short myip.opendns.com @resolver1.opendns.com)
+#az mysql server firewall-rule create --name "ClientIPAddress_"$(date +%Y%m%d) --resource-group $resource_group_name --server-name $database_server_name --start-ip-address $my_public_ip --end-ip-address $my_public_ip > /dev/null
 
 echo "DELETING TEMP DATA"
 temp_file_folder=$installation_dir$(read_config FILES TEMP_FOLDER)
