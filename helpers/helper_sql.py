@@ -3,11 +3,11 @@ import pymysql.cursors
 import datetime
 import helpers.helper_config as helper_config
 
-sql_insert_statement_template_milestone  = "REPLACE INTO {SQL_TABLE} (milestone_id, milestone_name, engagement_id, monthly_acr, milestone_date, milestone_status, milestone_modifiedon_date) VALUES ('{MILESTONE_ID}', '{MILESTONE_NAME}', '{ENGAGEMENT_ID}', {MONTHLY_ACR}, '{MILESTONE_DATE}', '{MILESTONE_STATUS}', '{MILESTONE_MODIFIED_DATE}' ) "
-sql_insert_statement_template_engagement = "REPLACE INTO {SQL_TABLE} (engagement_id, engagement_name, monthly_acr, engagement_status, engagement_owner, engagement_completion_date, engagement_sponsor, engagement_partner, engagement_state, engagement_preferred_region, engagement_start_date, engagement_created_date, engagement_modified_date, engagement_status_label, engagement_workload, engagement_solution_area, engagement_health_label, engagement_account_id, msp_engagementid) VALUES ('{ENGAGEMENT_ID}', '{ENGAGEMENT_NAME}', {ENGAGEMENT_ACR}, {ENGAGEMENT_STAGE}, '{ENGAGEMENT_OWNER}', '{ENGAGEMENT_COMPLETION_DATE}', '{ENGAGEMENT_SPONSOR}', '{ENGAGEMENT_PARTNER}', '{ENGAGEMENT_STATE}', '{ENGAGEMENT_PREFERRED_REGION}', '{ENGAGEMENT_START_DATE}', '{ENGAGEMENT_CREATED_DATE}', '{ENGAGEMENT_MODIFIED_DATE}','{ENGAGEMENT_STATUS_LABEL}', '{ENGAGEMENT_WORKLOAD}', '{ENGAGEMENT_SOLUTION_AREA}', '{ENGAGEMENT_HEALTH_LABEL}', '{ENGAGEMENT_ACCOUNT_ID}', '{MSP_ENGAGEMENT_ID}' ) "
+sql_insert_statement_template_milestone  = 'REPLACE INTO {SQL_TABLE} (milestone_id, milestone_name, engagement_id, monthly_acr, milestone_date, milestone_status, milestone_modifiedon_date) VALUES ("{MILESTONE_ID}", "{MILESTONE_NAME}", "{ENGAGEMENT_ID}", {MONTHLY_ACR}, "{MILESTONE_DATE}", "{MILESTONE_STATUS}", "{MILESTONE_MODIFIED_DATE}" ) '
+sql_insert_statement_template_engagement = 'REPLACE INTO {SQL_TABLE} (engagement_id, engagement_name, monthly_acr, engagement_status, engagement_owner, engagement_completion_date, engagement_sponsor, engagement_partner, engagement_state, engagement_preferred_region, engagement_start_date, engagement_created_date, engagement_modified_date, engagement_status_label, engagement_workload, engagement_solution_area, engagement_health_label, engagement_account_id, msp_engagementid) VALUES ("{ENGAGEMENT_ID}", "{ENGAGEMENT_NAME}", {ENGAGEMENT_ACR}, {ENGAGEMENT_STAGE}, "{ENGAGEMENT_OWNER}", "{ENGAGEMENT_COMPLETION_DATE}", "{ENGAGEMENT_SPONSOR}", "{ENGAGEMENT_PARTNER}", "{ENGAGEMENT_STATE}", "{ENGAGEMENT_PREFERRED_REGION}", "{ENGAGEMENT_START_DATE}", "{ENGAGEMENT_CREATED_DATE}", "{ENGAGEMENT_MODIFIED_DATE}","{ENGAGEMENT_STATUS_LABEL}", "{ENGAGEMENT_WORKLOAD}", "{ENGAGEMENT_SOLUTION_AREA}", "{ENGAGEMENT_HEALTH_LABEL}", "{ENGAGEMENT_ACCOUNT_ID}", "{MSP_ENGAGEMENT_ID}" ) '
 
 sql_select_statement_template_field_name_from_field_id = "SELECT field_name FROM {SQL_TABLE} WHERE field_id = '{FIELD_ID}'"
-sql_insert_statement_template_field_name_from_field_id = "REPLACE INTO {SQL_TABLE} (field_id, field_name) VALUES ('{FIELD_ID}', '{FIELD_NAME}')"
+sql_insert_statement_template_field_name_from_field_id = 'REPLACE INTO {SQL_TABLE} (field_id, field_name) VALUES ("{FIELD_ID}", "{FIELD_NAME}")'
 
 sql_engagement_info_select_statement_template = "SELECT engagement_name, engagement_owner, engagement_status FROM engagements WHERE engagement_name = '{}'"
 
@@ -144,7 +144,6 @@ def _normalize_integers(int_string):
         return int(int_string)
 
 def update_field_name_for_field_id(database_connection, database_table, field_id, field_name):
-    sql_insert_statement_template_field_name_from_field_id
-
+    
     sql_statement = sql_insert_statement_template_field_name_from_field_id.format(SQL_TABLE = database_table, FIELD_ID = field_id, FIELD_NAME = field_name)
     query_result = _execute_query(database_connection, sql_statement)
